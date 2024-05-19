@@ -8,6 +8,7 @@
 #include <iostream>
 #include <deque>
 #include <map>
+#include <cstdint>
 
 
 typedef std::tuple< int64_t, int64_t, int64_t, int32_t, int32_t, float > ToneTuple;
@@ -271,9 +272,18 @@ typedef std::tuple< int64_t, int64_t, int64_t, int32_t, int32_t, float > ToneTup
         "Basic Fiddle", "Basic Bassoon", "Lonely Mountain Bassoon", "Brusque Bassoon"
     };
 
+    std::vector<std::string> Vydorstyleinstrumentnames =
+    {
+        "Lute of Ages", "Basic Harp", "Basic Theorbo", "Basic Horn", "Basic Clarinet", "Basic Flute", "Basic Bagpipe", "Basic Pipgorn", "Basic Drum",
+     //      0      1        2         3         4          5        6           7         8
+        "Basic Cowbell", "Moor Cowbell", "Basic Lute", "Misty Mountain Harp", "Student Fiddle", "Lonely Mountain Fiddle", "Sprightly Fiddle", "Traveller's Trusty Fiddle", "Bardic Fiddle",
+     //      9          10                 11            12         13          14           15         16          17
+        "Basic Fiddle", "Basic Bassoon", "Lonely Mountain Bassoon", "Brusque Bassoon"
+    };
+
     std::vector<std::vector<std::string>> abcnamingstyleinstrumentnames =
     {
-        rockstyleinstrumentnames, TSOtyleinstrumentnames, TSOtyleinstrumentnames, Maestrostyleinstrumentnames
+        rockstyleinstrumentnames, TSOtyleinstrumentnames, TSOtyleinstrumentnames, Maestrostyleinstrumentnames, Vydorstyleinstrumentnames
     };
 
 

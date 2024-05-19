@@ -1,0 +1,20 @@
+Opening Mapping File: D:\Brian\Development\BruTE-\albatros.map
+Songname: Albatros 
+Transcriber: Vydor 
+Mapping file D:\Brian\Development\BruTE-\albatros.map loaded.
+Importing pitchbends.config.
+Pitchbends are going to be processed with relative strength 2
+Mapping Info 
+ABC Track: 1 Miditrack: 1
+ABC Track: 2 Miditrack: 1
+ABC Track: 3 Miditrack: 6
+ABC Track: 4 Miditrack: 5
+ABC Track: 5 Miditrack: 4
+ABC Track: 6 Miditrack: 3
+ABC Track: 7 Miditrack: 2
+Mapped Tones to Register
+Breaking registers into chords.
+Correcting starting times for chords.
+Correcting starting times for chords.
+Somehow we wiggled it all into place!
+Checking for max duration.

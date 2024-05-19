@@ -1,7 +1,9 @@
 #include "stdio.h"
 #include "string.h"
 #include "include/brute.h"
+#include <iostream>
 
+using namespace std;
 
 int main(int argc, char** argv)
 {
@@ -9,7 +11,10 @@ int main(int argc, char** argv)
    //Brute myBrute;
    Brute* myBrute = new Brute;
 
+   #include <iostream>
 
+   cout << "Brute Engine" << std::endl;
+   cout << "Args " << argv[1] << std::endl;
    // classic midival equivalency
    if ( argc > 1)
       if ( strcmp( argv[1], "midival" ) == 0 )
@@ -48,7 +53,7 @@ int main(int argc, char** argv)
          std::cout << "config imported" << std::endl;
 
          std::cout << &myBrute->m_MappingText << std::endl;
-
+         
          myBrute->Transcode(   &myBrute->m_MappingText );
          std::cout << "transcoded" << std::endl;
 
@@ -57,6 +62,70 @@ int main(int argc, char** argv)
                abcoutfile << myBrute->m_ABCText.rdbuf();
                abcoutfile.close();
       }
+
+      // classic midival equivalency
+   if ( argc > 1)
+      {
+         // this is the standart midival functionality
+         std::cout << "loading" << argv[1] << std::endl;                       
+         myBrute->LoadMidi(argv[1]);
+
+         std::cout << "importing" << argv[2] << std::endl;
+         myBrute->ImportConfig(argv[2]);
+
+         // copy the notes to the tracks
+         myBrute->CopyMidiInfoToTracks();
+
+         // this starts the tone quantization
+         myBrute->GenerateQuantizedNotes2();
+
+         // this creates the reduced selection for the abctracks (alternate, split, durationsplit)
+         myBrute->GenerateNoteSelection2();
+
+         // map the tones on the grid
+         myBrute->MapToRegister2();
+
+         // break it into lists of chords with duration
+         myBrute->GenerateRoughChordLists();
+
+         // now we need to adjust Chords in time to get them to not have a 
+         // missmatch if possible and also make sure they are long enough
+         myBrute->ChordJoinDurations();
+
+         // now that we joined equal chords, we have to transfer duration to make the starts fit
+         myBrute->CorrectMissmatch();
+
+         // Check for too short tones and try to correct them!
+         myBrute->CompensateEasy();
+
+         // Make sure we really have it all!
+         if (!myBrute->AllChordsOK()){
+                std::cout << " we didn't catch everything " << std::endl;
+                myBrute->CompensateEasy();
+         } else {
+             m_log << "Somehow we wiggled it all into place!" << std::endl;
+         }
+
+         // essentially break up chords that are too long into sustained ones
+         myBrute->Check_for_too_long_tones();   
+
+         // Pre-Generate duration string names
+         myBrute->GenerateDurationNames();
+
+         // Now we can export an ABC file
+         char abcname[8] = "new.abc";
+         if (argc > 3) strcpy(abcname, argv[3]);
+         
+         myBrute->ExportABC(abcname);
+         
+         std::ofstream logfile;
+         logfile.open("logfile.txt");
+         logfile.clear();
+         logfile << m_log.rdbuf();
+         logfile.close();
+
+      }
+
    return 0;
 }
 

@@ -2820,6 +2820,25 @@ void Brute::GenerateABC()
 
     }
 
+    if (ABCstyle == 4)
+    {
+        StyleParts.resize(300); for (size_t i = 0; i < StyleParts.size(); i++) StyleParts[i]=-1;
+        for (int abctrack = 0; abctrack < abctracks; abctrack++)
+        {
+            int thisinstrument = m_Mapping.m_instrumap[abctrack];
+            int thispartnumber = lotroinstrumentadd[thisinstrument]+1;
+            while ( StyleParts[thispartnumber] != -1) thispartnumber++;
+            StyleParts[thispartnumber] = abctrack;   // now we know which X:   refers to which abctrack number
+           // std::cout << " Adding to " << thispartnumber << "  " << abctrack << std::endl;
+        }
+
+        for (size_t i = 0; i < StyleParts.size(); i++)
+        {
+            if (StyleParts[i] > -1)
+                StyleOrder.push_back(i);
+        }
+       // std::cout << "Style Order Size " << StyleOrder.size() << std::endl;
+    }
 
 
     std::vector<int> alreadyused={};
@@ -2835,7 +2854,7 @@ void Brute::GenerateABC()
         m_ABCText << "T: " << m_Mapping.m_songname  << " " << abctrack+1 << "/" << abctracks << " [" << abcnamingstyleinstrumentnames[ABCstyle][ m_Mapping.m_instrumap[abctrack] ] << "] " <<  durstring << std::endl;
 
 
-        m_ABCText << "Z: Transcribed with BruTE " << m_Mapping.m_panningmap[abctrack] << " " << m_Mapping.m_zpanningmap[abctrack] << " " << m_Mapping.m_idmap[abctrack] << std::endl;
+        //m_ABCText << "Z: Transcribed with BruTE " << m_Mapping.m_panningmap[abctrack] << " " << m_Mapping.m_zpanningmap[abctrack] << " " << m_Mapping.m_idmap[abctrack] << std::endl;
         m_ABCText << "L: 1/4" << std::endl;
         m_ABCText << "Q: 125" << std::endl;
         m_ABCText << "K: C" << std::endl;
@@ -2846,7 +2865,7 @@ void Brute::GenerateABC()
           curabctrack = StyleParts[StyleOrder[abctrack]];
           m_ABCText << "X:" << StyleOrder[abctrack] << std::endl;
           m_ABCText << "T: " << m_Mapping.m_songname << " " << abcnamingstyleinstrumentnames[ABCstyle][   m_Mapping.m_instrumap[  StyleParts[StyleOrder[abctrack]] ]   ] << " (" <<  durstring << ")" <<std::endl;
-          m_ABCText << "Z: Transcribed with BruTE " << m_Mapping.m_panningmap[curabctrack] << " " << m_Mapping.m_zpanningmap[curabctrack] << " " << m_Mapping.m_idmap[curabctrack] << std::endl;
+          //m_ABCText << "Z: Transcribed with BruTE " << m_Mapping.m_panningmap[curabctrack] << " " << m_Mapping.m_zpanningmap[curabctrack] << " " << m_Mapping.m_idmap[curabctrack] << std::endl;
           m_ABCText << "L: 1/4" << std::endl;
           m_ABCText << "Q: 125" << std::endl;
           m_ABCText << "K: C" << std::endl;
@@ -2861,7 +2880,17 @@ void Brute::GenerateABC()
           m_ABCText << "X:" <<  myX << std::endl;
 
           m_ABCText << "T: " << m_Mapping.m_songname << " " << abcnamingstyleinstrumentnames[ABCstyle][   m_Mapping.m_instrumap[ curabctrack ]   ] << " " <<  durstring << std::endl;
-          m_ABCText << "Z: Transcribed with BruTE " << m_Mapping.m_panningmap[curabctrack] << " " << m_Mapping.m_zpanningmap[curabctrack] << " " << m_Mapping.m_idmap[curabctrack] << std::endl;
+          //m_ABCText << "Z: Transcribed with BruTE " << m_Mapping.m_panningmap[curabctrack] << " " << m_Mapping.m_zpanningmap[curabctrack] << " " << m_Mapping.m_idmap[curabctrack] << std::endl;
+          m_ABCText << "L: 1/4" << std::endl;
+          m_ABCText << "Q: 125" << std::endl;
+          m_ABCText << "K: C" << std::endl;
+      }
+
+      if (ABCstyle == 4) // Vydor
+      {
+          curabctrack = StyleParts[StyleOrder[abctrack]];
+          m_ABCText << "X:" << StyleOrder[abctrack] << std::endl;
+          m_ABCText << "T: " << m_Mapping.m_songname << " " << abcnamingstyleinstrumentnames[ABCstyle][   m_Mapping.m_instrumap[  StyleParts[StyleOrder[abctrack]] ]   ] << " (" <<  durstring << ")" <<std::endl;
           m_ABCText << "L: 1/4" << std::endl;
           m_ABCText << "Q: 125" << std::endl;
           m_ABCText << "K: C" << std::endl;

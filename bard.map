@@ -1,0 +1,62 @@
+Name: The Racoon Bard 
+Speedup: 5
+Pitch: 0
+Style: TSO  % Defaults for -a rock and a hard place-, others: TSO, Meisterbarden, Bara
+Volume: 90       % scaled, midi volume was -88
+Compress: 1.0   % default : midi dynamics, between 0 and 1: smaller loudness differences, >1: increase loudness differences
+%no pitch guessing   %uncomment to switch off guessing of default octaves
+%no back folding     %uncomment to switch off folding of tone-pitches inside the playable region
+fadeout length 0    %seconds before the end to start with fadeout (try something between 5 and 15)
+Transcriber Vydor 
+
+
+abctrack begin
+%voladjust    %uncomment to try automatic compensation for U16.1 volumes (experimental!)
+polyphony 6 top % options: top removes tones from higher pitch first, bottom lower pitch first
+duration 2 10000
+panning 0  100  3
+ffamp 0.000000
+ffshift 0.000000
+ffcoupling 
+instrument clarinet
+%
+% Miditrack original Instrument doo
+miditrack 3 pitch 0 volume 0 delay 0 prio 1
+abctrack end
+
+
+abctrack begin
+%voladjust    %uncomment to try automatic compensation for U16.1 volumes (experimental!)
+polyphony 6 top % options: top removes tones from higher pitch first, bottom lower pitch first
+duration 2 10000
+panning 21  100  2
+ffamp 0.000000
+ffshift 0.000000
+ffcoupling 
+instrument harp
+%
+% Miditrack original Instrument nyguitar
+miditrack 2 pitch 0 volume 0 delay 0 prio 1
+abctrack end
+
+
+abctrack begin
+%voladjust    %uncomment to try automatic compensation for U16.1 volumes (experimental!)
+polyphony 6 top % options: top removes tones from higher pitch first, bottom lower pitch first
+duration 2 10000
+panning 41  100  1
+ffamp 0.000000
+ffshift 0.000000
+ffcoupling 
+instrument lute
+%
+% Miditrack original Instrument acguitar
+miditrack 1 pitch 0 volume 0 delay 0 prio 1
+abctrack end
+
+
+%BV 0  x:  390  y: 100
+%BV 1  x:  270  y: 100
+%BV 2  x:  150  y: 100
+
+
