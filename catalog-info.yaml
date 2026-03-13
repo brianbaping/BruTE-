@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: BruTE-
+  description: "Follow up for the Python-based BruTE"
+  annotations:
+    github.com/project-slug: brianbaping/BruTE-
+spec:
+  type: tool
+  lifecycle: experimental
+  owner: user:default/brianbaping
